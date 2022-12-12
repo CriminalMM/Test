@@ -1,0 +1,689 @@
+local HWIDTable = loadstring(game:HttpGet("https://pastebin.com/raw/hBvf30bS"))()
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+for i,v in pairs(HWIDTable) do
+    if v == HWID then
+        print("HWID ID System: Passed! - Script loading Now...")
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wally2", true))()
+local w = library:CreateWindow('ReaperWare V1.1')
+w:Section('Player Options') --// Section 1 - LocalPlayer
+
+local box = w:Box('WalkSpeed', {
+   flag = "ws";
+   type = 'number';
+}, function(new, old, enter)
+   print(new, old, enter)
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(new)
+end)
+
+local box = w:Box('JumpPower', {
+   flag = "jp";
+   type = 'number';
+}, function(new, old, enter)
+   print(new, old, enter)
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(new)
+end)
+
+w:Bind("Zelfmoord", {
+   flag = "killbind";
+   kbonly = true;
+   default = Enum.KeyCode.RightAlt;
+}, function()
+   local args = {
+    [1] = "Ik Ben Suicidaal",
+    [2] = "All"
+}
+
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+   game.Players.LocalPlayer.Character:BreakJoints()
+end)
+
+local b2 = w:Button('Sit', function()
+  game.Players.LocalPlayer.Character.Humanoid.Sit = true
+end)
+
+local b2 = w:Button('Set Hunger', function()
+   while wait() do
+    game:GetService("Players").LocalPlayer.Hunger.Value=99999
+    end
+end)
+
+local b2 = w:Button('Set Thirst', function()
+   	while wait() do
+    game:GetService("Players").LocalPlayer.Drink.Value=99999
+    end
+end)
+
+local b2 = w:Button('Politie Schot Melding Uit', function()
+   game:GetService("ReplicatedStorage").Events.PolitieMeldingEvent:Destroy()
+end)
+
+local b2 = w:Button('XP Loop (Hulpdienst)', function()
+   while wait() do
+		game:GetService("ReplicatedStorage").Events.XP:FireServer()
+		end
+end)
+
+local old = workspace.CurrentCamera.FieldOfView
+local s = w:Slider("FOV Slider", {
+   min = math.floor(workspace.CurrentCamera.FieldOfView);
+   max = 120;
+   flag = 'fov'
+}, function(v)
+   workspace.CurrentCamera.FieldOfView = v;
+end)
+local b2 = w:Button('Reset FOV', function()
+   s:Set(old)
+end)
+
+local b2 = w:Button('Noclip/Clip', function()
+  game.StarterGui:SetCore("SendNotification",  {
+		Title = "Noclip - ReaperWare";
+		Text = "Click To Noclip/Clip";
+		Icon = "11800595123";
+		Duration = 10;
+		Button1 = "Okay";
+		Button2 = "Understood";
+		Callback = NotificationBindable;
+	   })
+mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = ("Equip To Noclip")
+tool.Activated:Connect(function()
+game.Players.LocalPlayer.Character.Humanoid.MaxHealth = math.huge
+game.Players.LocalPlayer.Character.Humanoid.Health = math.huge
+while true do
+		game:GetService("RunService").Stepped:wait()
+		game.Players.LocalPlayer.Character.Head.CanCollide = false
+		game.Players.LocalPlayer.Character.Torso.CanCollide = false
+end
+end) tool.Parent = game.Players.LocalPlayer.Backpack
+
+mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = ("Equip To Un - Noclip")
+tool.Activated:Connect(function()
+game.Players.LocalPlayer.Character.Humanoid.MaxHealth = math.huge
+game.Players.LocalPlayer.Character.Humanoid.Health = math.huge
+while true do
+		game:GetService("RunService").Stepped:wait()
+		game.Players.LocalPlayer.Character.Head.CanCollide = true
+		game.Players.LocalPlayer.Character.Torso.CanCollide = true
+end
+end) tool.Parent = game.Players.LocalPlayer.Backpack
+
+end)
+
+local b2 = w:Button('(Silent) Touch Fling', function()
+  game.StarterGui:SetCore("SendNotification",  {
+		Title = "Touch Fling - ReaperWare";
+		Text = "Press X To Enable/Disable!";
+		Icon = "11800595123";
+		Duration = 10;
+		Button1 = "Okay";
+		Button2 = "Understood";
+		Callback = NotificationBindable;
+	   })
+  _G.KeyCode = "X"
+  loadstring(game:HttpGet("https://shattered-gang.lol/scripts/fe/touch_fling.lua"))()
+end)
+
+w:Section('Server Options')
+
+local b2 = w:Button('EarrapeV2', function()
+   	game.StarterGui:SetCore("SendNotification",  {
+		Title = "Earrape V2";
+		Text = "This May Take A While.";
+		Icon = "11800595123";
+		Duration = 10;
+		Button1 = "Okay";
+		Button2 = "Understood";
+		Callback = NotificationBindable;
+	   })
+--// Doesn't work if RespectFilteringEnabled is enabled
+print(game:GetService("SoundService").RespectFilteringEnabled)
+
+--// Get's every sound instance in workspace and play's it (Earrape btw)
+for _, sound in next, workspace:GetDescendants() do
+ if sound:IsA("Sound") then
+	 sound:Play()
+ end
+end
+end)
+
+local b2 = w:Button('Geef Iedereen Boete', function()
+         game.StarterGui:SetCore("SendNotification",  {
+		Title = "Boete Gever - ReaperWare";
+		Text = "Je hebt iedereen een kkr dure boete gegeven.";
+		Icon = "11800595123";
+		Duration = 10;
+		Button1 = "Okay";
+		Button2 = "Understood";
+		Callback = NotificationBindable;
+	   })
+	   local plr = game.Players.LocalPlayer
+    local bedrag = 99999999999999999
+    local reden = "Dutch Hub On Top / https://discord.gg/hKUbA2HXe7 Jullie kkr moeders"
+    for _,v in pairs(game:GetService("Players"):GetPlayers()) do
+
+            local string_1 = v.Name;
+            local string_2 = reden;
+            local number_1 = bedrag;
+            local Target = game:GetService("ReplicatedStorage").Boete.meos;
+            Target:FireServer(string_1, string_2, number_1);
+            end
+end)
+
+local b2 = w:Button('Chat Spy', function()
+   	--This script reveals ALL hidden messages in the default chat
+--chat "/spy" to toggle!
+enabled = true
+--if true will check your messages too
+spyOnMyself = true
+--if true will chat the logs publicly (fun, risky)
+public = false
+--if true will use /me to stand out
+publicItalics = true
+--customize private logs
+privateProperties = {
+	Color = Color3.fromRGB(0,255,255); 
+	Font = Enum.Font.SourceSansBold;
+	TextSize = 18;
+}
+--////////////////////////////////////////////////////////////////
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
+local instance = (_G.chatSpyInstance or 0) + 1
+_G.chatSpyInstance = instance
+
+local function onChatted(p,msg)
+	if _G.chatSpyInstance == instance then
+		if p==player and msg:lower():sub(1,4)=="/spy" then
+			enabled = not enabled
+			wait(0.3)
+			privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+			StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+		elseif enabled and (spyOnMyself==true or p~=player) then
+			msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
+			local hidden = true
+			local conn = getmsg.OnClientEvent:Connect(function(packet,channel)
+				if packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and public==false and Players[packet.FromSpeaker].Team==player.Team)) then
+					hidden = false
+				end
+			end)
+			wait(1)
+			conn:Disconnect()
+			if hidden and enabled then
+				if public then
+					saymsg:FireServer((publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
+				else
+					privateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
+					StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+				end
+			end
+		end
+	end
+end
+
+for _,p in ipairs(Players:GetPlayers()) do
+	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end
+Players.PlayerAdded:Connect(function(p)
+	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+end)
+privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+local chatFrame = player.PlayerGui.Chat.Frame
+chatFrame.ChatChannelParentFrame.Visible = true
+chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
+end)
+ 
+w:Section('Weapons (Equip After Press')
+
+local b2 = w:Button('Modify Glock 17', function()
+   	game:GetService("Players").LocalPlayer.Backpack["Glock 17"]["ACS_Modulo"].Variaveis.Suppressor.Value=true --// Suppressor Glock17
+game:GetService("Players").LocalPlayer.Backpack["Glock 17"]["ACS_Modulo"].Variaveis.Ammo.Value=9999 --// Inf ammo
+game:GetService("Players").LocalPlayer.Backpack["Glock 17"]["ACS_Modulo"].Variaveis.StoredAmmo.Value=9999 --// Stored ammo inf
+end)
+
+local b2 = w:Button('Modify Walther P99', function()
+   game:GetService("Players").LocalPlayer.Backpack["Walther P99"]["ACS_Modulo"].Variaveis.Ammo.Value=326236236266236
+end)
+
+local b2 = w:Button('Modify Wapenstok (OP)', function()
+   	while wait() do
+        game:GetService("Players").gberhoi97ltwzewsl7hc.Backpack.Wapenstok.Damage.Value=35236
+        game:GetService("Players").gberhoi97ltwzewsl7hc.Backpack.Wapenstok.HeadDamage.Value=35236
+        game:GetService("Players").gberhoi97ltwzewsl7hc.Backpack.Wapenstok.BackstabDamage.Value=35236
+        end
+end)
+
+w:Section('Geld eh niffo')
+
+local b2 = w:Button('Infinite Money Loop (FE)', function()
+   	while wait() do
+		game:GetService("ReplicatedStorage").Salaris.Geld:FireServer()
+		end
+end)
+
+local b2 = w:Button('Infinite Money (Local)', function()
+   game:GetService("Players").LocalPlayer.leaderstats.Bank.Value=999999999999999999999999999999999999
+end)
+
+w:Section('Free Stuff')
+
+local b2 = w:Button('Gratis Mclaren P1', function()
+   	local args = {
+        [1] = "2013 Mclaren P1",
+        [2] = 0
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.BuyVehicleRE:FireServer(unpack(args))
+    --Free 2013 Mclaren P1
+end)
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wally2", true))()
+local w = library:CreateWindow('ReaperWare - ESP')
+w:Section('Visuals') --// Section 1 - LocalPlayer
+
+local b2 = w:Button('Hitbox Expander', function()
+  -- loop
+game:GetService("RunService").Stepped:Connect(function()
+  -- gets all players in the server
+  for _, player in next, game:GetService("Players"):GetPlayers() do
+      -- checks if the player found was not the local player, so the local player doesnt get his hitbox extended
+      if player ~= game:GetService("Players").LocalPlayer then
+          -- finds humanoid root part, then changes transparecy and can collide so you can walk through the hitbox and it wont be wonky
+          if player.Character:FindFirstChild("HumanoidRootPart") then
+              player.Character["HumanoidRootPart"].CanCollide = false
+              player.Character["HumanoidRootPart"].Transparency = 0.5
+          end
+          
+          -- changes the humanoidrootpart size (basically the main code)
+          if player.Character["HumanoidRootPart"].Size ~= Vector3.new(20, 20, 20) then
+              player.Character["HumanoidRootPart"].Size = Vector3.new(20, 20, 20)
+          end
+      end
+  end
+end)
+end)
+
+local b2 = w:Button('Skeleton', function()
+  local camera = workspace.CurrentCamera
+local entities = game:GetService("Players")
+local localplayer = entities.LocalPlayer 
+local runservice = game:GetService("RunService")
+
+local esp_settings = {
+    enabled = true,
+    skel = true,
+    skel_col = Color3.fromRGB(255,255,255)
+}
+
+local function draw(player, character)
+
+    local skel_head = Drawing.new("Line")
+    skel_head.Visible = false
+    skel_head.Thickness = 1.5
+    skel_head.Color = Color3.new(1,1,1)
+
+    local skel_torso = Drawing.new("Line")
+    skel_torso.Visible = false
+    skel_torso.Thickness = 1.5
+    skel_torso.Color = Color3.new(1,1,1)
+
+    local skel_leftarm = Drawing.new("Line")
+    skel_leftarm.Visible = false
+    skel_leftarm.Thickness = 1.5
+    skel_leftarm.Color = Color3.new(1,1,1)
+
+    local skel_rightarm = Drawing.new("Line")
+    skel_rightarm.Visible = false
+    skel_rightarm.Thickness = 1.5
+    skel_rightarm.Color = Color3.new(1,1,1)
+
+    local skel_leftleg = Drawing.new("Line")
+    skel_leftleg.Visible = false
+    skel_leftleg.Thickness = 1.5
+    skel_leftleg.Color = Color3.new(1,1,1)
+
+    local skel_rightleg = Drawing.new("Line")
+    skel_rightleg.Visible = false
+    skel_rightleg.Thickness = 1.5
+    skel_rightleg.Color = Color3.new(1,1,1)
+
+    local function update()
+        local connection
+        connection = runservice.RenderStepped:Connect(function()
+
+            if workspace:FindFirstChild(character.Name) and
+            character and 
+            character:FindFirstChild("HumanoidRootPart") and 
+            character:FindFirstChild("Humanoid") and 
+            character:FindFirstChild("Humanoid").Health ~= 0 then 
+
+                local character_rootpart_3d = character.HumanoidRootPart.Position
+                local character_rootpart_2d, rootpart_onscreen = camera:WorldToViewportPoint(character_rootpart_3d)
+
+                if rootpart_onscreen and character.Humanoid.RigType == Enum.HumanoidRigType.R6 and esp_settings.enabled then
+
+                    local head_2d = camera:WorldToViewportPoint(character.Head.Position)
+                    local torso_upper_2d = camera:WorldToViewportPoint(character.Torso.Position + Vector3.new(0,1,0))
+                    local torso_lower_2d = camera:WorldToViewportPoint(character.Torso.Position + Vector3.new(0,-1,0))
+                    
+                    local leftarm_2d = camera:WorldToViewportPoint(character["Left Arm"].Position + Vector3.new(0,-1,0))
+                    local rightarm_2d = camera:WorldToViewportPoint(character["Right Arm"].Position + Vector3.new(0,-1,0))
+                    local leftleg_2d = camera:WorldToViewportPoint(character["Left Leg"].Position + Vector3.new(0,-1,0))
+                    local rightleg_2d = camera:WorldToViewportPoint(character["Right Leg"].Position + Vector3.new(0,-1,0))
+
+                    skel_head.From = Vector2.new(head_2d.X, head_2d.Y)
+                    skel_head.To = Vector2.new(torso_upper_2d.X, torso_upper_2d.Y)
+
+                    skel_torso.From = Vector2.new(torso_upper_2d.X, torso_upper_2d.Y)
+                    skel_torso.To = Vector2.new(torso_lower_2d.X, torso_lower_2d.Y)
+                    
+                    skel_leftarm.From = Vector2.new(torso_upper_2d.X, torso_upper_2d.Y)
+                    skel_leftarm.To = Vector2.new(leftarm_2d.X, leftarm_2d.Y)
+
+                    skel_rightarm.From = Vector2.new(torso_upper_2d.X, torso_upper_2d.Y)
+                    skel_rightarm.To = Vector2.new(rightarm_2d.X, rightarm_2d.Y)
+
+                    skel_leftleg.From = Vector2.new(torso_lower_2d.X, torso_lower_2d.Y)
+                    skel_leftleg.To = Vector2.new(leftleg_2d.X, leftleg_2d.Y)
+
+                    skel_rightleg.From = Vector2.new(torso_lower_2d.X, torso_lower_2d.Y)
+                    skel_rightleg.To = Vector2.new(rightleg_2d.X, rightleg_2d.Y)
+
+                    skel_head.Visible = esp_settings.skel
+                    skel_torso.Visible = esp_settings.skel
+                    skel_leftarm.Visible = esp_settings.skel
+                    skel_rightarm.Visible = esp_settings.skel
+                    skel_leftleg.Visible = esp_settings.skel
+                    skel_rightleg.Visible = esp_settings.skel
+
+                else
+
+                    skel_head.Visible = false
+                    skel_torso.Visible = false
+                    skel_leftarm.Visible = false
+                    skel_rightarm.Visible = false
+                    skel_leftleg.Visible = false
+                    skel_rightleg.Visible = false
+
+                end
+
+            else
+
+                if player == nil then
+                    connection:Disconnect()
+                    connection = nil 
+                end
+
+                skel_head.Visible = false
+                skel_torso.Visible = false
+                skel_leftarm.Visible = false
+                skel_rightarm.Visible = false
+                skel_leftleg.Visible = false
+                skel_rightleg.Visible = false
+
+            end
+        end)
+    end
+    coroutine.wrap(update)()
+
+end
+
+local function playeradded(player)
+    if player.Character then
+        coroutine.wrap(draw)(player, player.Character)
+    end
+    player.CharacterAdded:Connect(function(character)
+        coroutine.wrap(draw)(player, character)
+    end)
+end
+
+for a,b in next, entities:GetPlayers() do
+    if b ~= localplayer then
+        playeradded(b)
+    end
+end
+
+entities.PlayerAdded:Connect(playeradded)
+end)
+
+local b2 = w:Button('Chams', function()
+  local dwEntities = game:GetService("Players")
+local dwLocalPlayer = dwEntities.LocalPlayer 
+local dwRunService = game:GetService("RunService")
+
+local settings_tbl = {
+    ESP_Enabled = true,
+    ESP_TeamCheck = false,
+    Chams = true,
+    Chams_Color = Color3.fromRGB(110,153,202),
+    Chams_Transparency = 0.1,
+    Chams_Glow_Color = Color3.fromRGB(110,153,202)
+}
+
+function destroy_chams(char)
+
+    for k,v in next, char:GetChildren() do 
+
+        if v:IsA("BasePart") and v.Transparency ~= 1 then
+
+            if v:FindFirstChild("Glow") and 
+            v:FindFirstChild("Chams") then
+
+                v.Glow:Destroy()
+                v.Chams:Destroy() 
+
+            end 
+
+        end 
+
+    end 
+
+end
+
+dwRunService.Heartbeat:Connect(function()
+
+    if settings_tbl.ESP_Enabled then
+
+        for k,v in next, dwEntities:GetPlayers() do 
+
+            if v ~= dwLocalPlayer then
+
+                if v.Character and
+                v.Character:FindFirstChild("HumanoidRootPart") and 
+                v.Character:FindFirstChild("Humanoid") and 
+                v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+
+                    if settings_tbl.ESP_TeamCheck == false then
+
+                        local char = v.Character 
+
+                        for k,b in next, char:GetChildren() do 
+
+                            if b:IsA("BasePart") and 
+                            b.Transparency ~= 1 then
+                                
+                                if settings_tbl.Chams then
+
+                                    if not b:FindFirstChild("Glow") and
+                                    not b:FindFirstChild("Chams") then
+
+                                        local chams_box = Instance.new("BoxHandleAdornment", b)
+                                        chams_box.Name = "Chams"
+                                        chams_box.AlwaysOnTop = true 
+                                        chams_box.ZIndex = 4 
+                                        chams_box.Adornee = b 
+                                        chams_box.Color3 = settings_tbl.Chams_Color
+                                        chams_box.Transparency = settings_tbl.Chams_Transparency
+                                        chams_box.Size = b.Size + Vector3.new(0.02, 0.02, 0.02)
+
+                                        local glow_box = Instance.new("BoxHandleAdornment", b)
+                                        glow_box.Name = "Glow"
+                                        glow_box.AlwaysOnTop = false 
+                                        glow_box.ZIndex = 3 
+                                        glow_box.Adornee = b 
+                                        glow_box.Color3 = settings_tbl.Chams_Glow_Color
+                                        glow_box.Size = chams_box.Size + Vector3.new(0.13, 0.13, 0.13)
+
+                                    end
+
+                                else
+
+                                    destroy_chams(char)
+
+                                end
+                            
+                            end
+
+                        end
+
+                    else
+
+                        if v.Team == dwLocalPlayer.Team then
+                            destroy_chams(v.Character)
+                        end
+
+                    end
+
+                else
+
+                    destroy_chams(v.Character)
+
+                end
+
+            end
+
+        end
+
+    else 
+
+        for k,v in next, dwEntities:GetPlayers() do 
+
+            if v ~= dwLocalPlayer and 
+            v.Character and 
+            v.Character:FindFirstChild("HumanoidRootPart") and 
+            v.Character:FindFirstChild("Humanoid") and 
+            v.Character:FindFirstChild("Humanoid").Health ~= 0 then
+                
+                destroy_chams(v.Character)
+
+            end
+
+        end
+
+    end
+
+end)
+end)
+
+local b2 = w:Button('Tracer', function()
+  _G.TeamCheck = false
+_G.Tracers = true
+local lp = game.Players.LocalPlayer
+local camera = game:GetService("Workspace").CurrentCamera
+local CurrentCamera = workspace.CurrentCamera
+local worldToViewportPoint = CurrentCamera.worldToViewportPoint
+
+for i,v in pairs(game.Players:GetChildren()) do
+    local Tracer = Drawing.new("Line")
+    Tracer.Visible = false
+    Tracer.Color = Color3.new(255,0,0)
+    Tracer.Thickness = 1
+    Tracer.Transparency = 1
+    
+    function traces()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lp and v.Character.Humanoid.Health > 0 then
+                local Vector, OnScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                
+                if OnScreen then
+                    Tracer.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 1)
+                    Tracer.To = Vector2.new(Vector.X, Vector.Y)
+                    
+                    if _G.TeamCheck and v.TeamColor == lp.TeamColor then
+                        Tracer.Visible = false
+                    else
+                        Tracer.Visible = true
+                    end
+                else
+                    Tracer.Visible = false
+                    
+                end
+            else
+                Tracer.Visible = false
+            end
+            if _G.Tracers == false then
+                Tracers.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(traces)()
+end
+
+game.Players.PlayerAdded:Connect(function()
+    local Tracer = Drawing.new("Line")
+    Tracer.Visible = false
+    Tracer.Color = Color3.new(255,0,0)
+    Tracer.Thickness = 1
+    Tracer.Transparency = 1
+    
+    function traces()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= lp and v.Character.Humanoid.Health > 0 then
+                local Vector, OnScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                
+                if OnScreen then
+                    Tracer.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 1)
+                    Tracer.To = Vector2.new(Vector.X, Vector.Y)
+                    
+                    if _G.TeamCheck and v.TeamColor == lp.TeamColor then
+                        Tracer.Visible = false
+                    else
+                        Tracer.Visible = true
+                    end
+                else
+                    Tracer.Visible = false
+                    
+                end
+            else
+                Tracer.Visible = false
+            end
+            if _G.Tracers == false then
+                Tracers.Visible = false
+            end
+        end)
+    end
+    coroutine.wrap(traces)()
+end)
+end)
+
+local b2 = w:Button('Highlight', function()
+  local Players = game:GetService("Players"):GetChildren()
+
+local highlight = Instance.new("Highlight")
+highlight.Name = "ESP"
+
+for i, v in pairs(Players) do
+    repeat wait() until v.Character
+    local highlightClone = highlight:Clone()
+    highlightClone.Adornee = v.Character
+    highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    repeat wait() until player.Character
+    local highlightClone = highlight:Clone()
+    highlightClone.Adornee = player.Character
+    highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+end)
+end)
+    end
+end
